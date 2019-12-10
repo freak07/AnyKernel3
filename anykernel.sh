@@ -35,13 +35,13 @@ set_perm_recursive 0 0 755 644 $ramdisk/*;
 set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
 
 ## begin vendor changes
-mount -o rw,remount -t auto /vendor >/dev/null;
+#mount -o rw,remount -t auto /vendor >/dev/null;
 
-cp -rf /tmp/anykernel/patch/init.qcom.post_boot.sh /vendor/bin/init.qcom.post_boot.sh;
-set_perm 0 0 0755 /vendor/bin/init.qcom.post_boot.sh;
+#cp -rf /tmp/anykernel/patch/init.qcom.post_boot.sh /vendor/bin/init.qcom.post_boot.sh;
+#set_perm 0 0 0755 /vendor/bin/init.qcom.post_boot.sh;
 
-cp -rf /tmp/anykernel/patch/msm_irqbalance.conf /vendor/etc/msm_irqbalance.conf;
-set_perm 0 0 0644 /vendor/etc/msm_irqbalance.conf;
+#cp -rf /tmp/anykernel/patch/msm_irqbalance.conf /vendor/etc/msm_irqbalance.conf;
+#set_perm 0 0 0644 /vendor/etc/msm_irqbalance.conf;
 
 
 ## AnyKernel install
