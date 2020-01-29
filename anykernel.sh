@@ -7,7 +7,6 @@ properties() { '
 kernel.string=Kirisakura-Kernel by Freak07 @ xda-developers
 do.devicecheck=1
 do.modules=0
-do.systemless=1
 do.cleanup=1
 do.cleanuponabort=0
 device.name1=coral
@@ -30,7 +29,8 @@ ramdisk_compression=auto;
 ## AnyKernel install
 dump_boot;
 
-
+# remove old root patch avoidance hack
+patch_cmdline "skip_override" "";
 
 # patch kernel dtb and/or dtbo on custom ROMs
 if [ -f $combined_image -o -f $home/dtbo.img ]; then
