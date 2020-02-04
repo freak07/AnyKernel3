@@ -12,7 +12,7 @@ do.cleanuponabort=0
 device.name1=crosshatch
 device.name2=blueline
 supported.versions=10
-supported.patchlevels=2019-04 -
+supported.patchlevels=2020-02 -
 '; } # end properties
 
 # shell variables
@@ -27,28 +27,10 @@ ramdisk_compression=auto;
 
 
 ## AnyKernel install
-split_boot;
+dump_boot;
 
-# use custom kernel compression
-kernel_compression=lz4;
-kernel_comp_ext=lz4;
-
-# combine kernel image and dtbs if separated in the zip
-decompressed_image=$home/kernel/Image;
-compressed_image=$decompressed_image.$kernel_comp_ext;
-combined_image=$home/Image.$kernel_comp_ext-dtb;
-if [ -f $compressed_image ]; then
-  # hexpatch the kernel if Magisk is installed ('skip_initramfs' -> 'want_initramfs')
-  if ! $bin/magiskboot cpio $split_img/ramdisk.cpio test; then
-    ui_print " " "Magisk detected! Patching kernel so reflashing Magisk is not necessary...";
-    $bin/magiskboot --decompress $compressed_image $decompressed_image;
-    $bin/magiskboot --hexpatch $decompressed_image 736B69705F696E697472616D667300 77616E745F696E697472616D667300;
-    $bin/magiskboot --compress=$kernel_compression $decompressed_image $compressed_image;
-  fi;
-  if [ -d $home/dtbs ]; then
-    cat $compressed_image $home/dtbs/*.dtb > $combined_image;
-  fi;
-fi;
+# remove old root patch avoidance hack
+patch_cmdline "skip_override" "";
 
 # patch kernel dtb and/or dtbo on custom ROMs
 if [ -f $combined_image -o -f $home/dtbo.img ]; then
@@ -74,7 +56,7 @@ if [ -f $combined_image -o -f $home/dtbo.img ]; then
   fi;
 fi;
 
-flash_boot;
+write_boot;
 flash_dtbo;
 ## end install
 
