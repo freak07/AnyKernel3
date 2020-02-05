@@ -7,7 +7,6 @@ properties() { '
 kernel.string=Kirisakura-Kernel for OP7/Pro aka Guacamole by freak07 @ xda-developers
 do.devicecheck=0
 do.modules=0
-do.systemless=1
 do.cleanup=1
 do.cleanuponabort=0
 device.name1=
@@ -50,14 +49,8 @@ dump_boot;
 
 # begin ramdisk changes
 
-# Add skip_override parameter to cmdline so user doesn't have to reflash Magisk
-if [ -d $ramdisk/.backup ]; then
-  ui_print " "; ui_print "Magisk detected! Patching cmdline so reflashing Magisk is not necessary...";
-  patch_cmdline "skip_override" "skip_override";
-else
-  patch_cmdline "skip_override" "";
-fi;
-
+# remove old root patch avoidance hack
+patch_cmdline "skip_override" "";
 
 if mountpoint -q /data; then
   # Optimize F2FS extension list (@arter97)
