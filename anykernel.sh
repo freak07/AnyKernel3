@@ -4,13 +4,13 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=Kirisakura-Kernel by Freak07 @ xda-developers
+kernel.string=Kirisakura Kernel for the Pixel 2 and Pixel 2 XL by @freak07
 do.devicecheck=1
 do.modules=0
 do.cleanup=1
 do.cleanuponabort=0
-device.name1=crosshatch
-device.name2=blueline
+device.name1=taimen
+device.name2=walleye
 supported.versions=10
 supported.patchlevels=2020-02 -
 '; } # end properties
