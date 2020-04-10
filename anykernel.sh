@@ -109,8 +109,8 @@ if [ -d $ramdisk/.backup ]; then
 	mv /tmp/anykernel/overlay.d $ramdisk/overlay.d
 	chmod -R 750 $ramdisk/overlay.d/*
 	chown -R root:root $ramdisk/overlay.d/*
-	chmod -R 755 $ramdisk/overlay.d/sbin/init.renderzenith.sh
-	chown -R root:root $ramdisk/overlay.d/sbin/init.renderzenith.sh
+	chmod -R 755 $ramdisk/overlay.d/sbin/init.kirisakura.sh
+	chown -R root:root $ramdisk/overlay.d/sbin/init.kirisakura.sh
 fi;
 
 # end ramdisk changes

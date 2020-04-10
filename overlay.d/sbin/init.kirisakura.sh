@@ -53,7 +53,7 @@ sleep 15;
 	echo 1 > /proc/sys/kernel/sched_walt_rotate_big_tasks
 
 
-# Disable WALT Signal and use PELT
+# Use WALT
 	echo 1 > /proc/sys/kernel/sched_use_walt_cpu_util
 	echo 1 > /proc/sys/kernel/sched_use_walt_task_util
 
@@ -63,13 +63,13 @@ sleep 15;
 	echo 128 > /sys/block/dm-0/queue/read_ahead_kb
 
 # Input boost and stune configuration
-#	echo "0:1382400" > /sys/module/cpu_boost/parameters/input_boost_freq
-#	echo 500 > /sys/module/cpu_boost/parameters/input_boost_ms
-	echo 15 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
+	echo "0:1113600 1:0 2:0 3:0 4:1171200 5:0 6:0 7:0" > /sys/module/cpu_boost/parameters/input_boost_freq
+	echo 1500 > /sys/module/cpu_boost/parameters/input_boost_ms
+	echo 30 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
 	echo 1500 > /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms
 
 # Dynamic Stune Boost during sched_boost
-	echo 15 > /dev/stune/top-app/schedtune.sched_boost
+#	echo 15 > /dev/stune/top-app/schedtune.sched_boost
 
 # Set min cpu freq
 	echo 576000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
@@ -104,8 +104,6 @@ sleep 15;
 	echo 0-3 > /dev/cpuset/background/cpus
 	echo 0-3  > /dev/cpuset/system-background/cpus
 	echo 2-3  > /dev/cpuset/audio-app/cpus
-
-# For better screen off idle
 	echo 0-3 > /dev/cpuset/restricted/cpus
 
 # Tune FS
@@ -113,5 +111,7 @@ sleep 15;
 	echo 10 > /proc/sys/vm/dirty_background_ratio
 
 sleep 5;
+
+#    echo 3 > /sys/sweep2sleep/sweep2sleep
 
 echo "Kirisakura-Kernel Setup Finished" >> /dev/kmsg
